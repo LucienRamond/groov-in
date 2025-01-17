@@ -1,6 +1,6 @@
 import { Band } from "./band";
 
-export interface Profile {
+export interface ProfileType {
   id: number;
   name: string;
   email: string;

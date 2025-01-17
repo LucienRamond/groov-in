@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import Page from "../../components/Page";
-import { Profile } from "../../utils/types/profile";
+import { ProfileType } from "../../utils/types/profileType";
+import ProfileComponent from "../../components/ProfileComponent";
 
 export default function Profiles() {
-  const [profiles, setProfiles] = useState<Array<Profile>>([]);
+  const [profiles, setProfiles] = useState<Array<ProfileType>>([]);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
@@ -14,9 +15,9 @@ export default function Profiles() {
 
   return (
     <Page title="Profiles">
-      <div>
-        {profiles.map((profile) => {
-          return <div>{profile.name}</div>;
+      <div className=" grid gap-2 mt-2">
+        {profiles.map((profile: ProfileType) => {
+          return <ProfileComponent profile={profile} />;
         })}
       </div>
     </Page>
