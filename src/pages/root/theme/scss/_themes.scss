@@ -1,0 +1,23 @@
+@use "colors" as *;
+
+html[data-theme="dark"] {
+  --background-color: #{$black-2};
+  --secondary-background-color: #{$black-1};
+  --third-background-color: #{$black-3};
+  --color: #{$white-1};
+  --border-color: #{$white-1};
+
+  --primary: #{$black-2};
+  --secondary: #{$blue-2};
+}
+
+html[data-theme="light"] {
+  --background-color: #{$red-2};
+  --secondary-background-color: #{$blue-1};
+  --third-background-color: #{$white-1};
+  --color: #{$white-1};
+  --border-color: #{$blue-1};
+
+  --primary: #{$red-1};
+  --secondary: #{$blue-2};
+}

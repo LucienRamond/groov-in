@@ -9,10 +9,10 @@ export default function Page({
   title?: string;
 }) {
   return (
-    <div className=" max-w-[90vw] bg-neutral-700 border border-white border-t-0 rounded-b-xl m-auto min-h-[80vh] px-4 pb-4">
+    <div className=" max-w-[90vw] bg-[var(--third-background-color)] border border-[var(--border-color)] border-t-0 rounded-b-xl m-auto min-h-[80vh] px-4 pb-4">
       <Typography
         variant="h5"
-        className=" border border-white border-t-0 bg-neutral-800 rounded-b-xl p-2"
+        className=" bg-[var(--secondary-background-color)] border text-[var(--color)] border-[var(--color)] border-t-0 rounded-b-xl p-2"
       >
         {title}
       </Typography>
