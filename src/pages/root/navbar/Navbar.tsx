@@ -8,9 +8,28 @@ import {
 import { CirclePause, CirclePlay } from "lucide-react";
 import { useNavigate } from "react-router";
 import ToggleTheme from "../theme/ToggleTheme";
+import { useEffect, useState } from "react";
+import UserNavBar from "./UserNavBar";
+
+export interface User {
+  id: number;
+  name: string;
+}
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+
+    if (!user) {
+      setCurrentUser(undefined);
+    } else {
+      setCurrentUser(JSON.parse(user));
+    }
+  }, [navigate]);
+
   return (
     <div className=" flex justify-between border-b border-[var(--color)] bg-[var(--secondary-background-color)]">
       <List className=" flex">
@@ -45,17 +64,27 @@ export default function Navbar() {
           </ListItemButton>
         </ListItem>
       </List>
+
       <List className=" flex">
-        <ListItem disablePadding disableGutters>
-          <ListItemButton onClick={() => navigate("/user/login")}>
-            <ListItemText primary="Login" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding disableGutters>
-          <ListItemButton onClick={() => navigate("/user/register")}>
-            <ListItemText primary="Register" />
-          </ListItemButton>
-        </ListItem>
+        {!currentUser ? (
+          <>
+            <ListItem disablePadding disableGutters>
+              <ListItemButton onClick={() => navigate("/user/login")}>
+                <ListItemText primary="Login" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding disableGutters>
+              <ListItemButton onClick={() => navigate("/user/register")}>
+                <ListItemText primary="Register" />
+              </ListItemButton>
+            </ListItem>
+          </>
+        ) : (
+          <UserNavBar
+            user={currentUser}
+            navigate={(destination: string) => navigate(destination)}
+          />
+        )}
         <ListItem disablePadding disableGutters>
           <ToggleTheme />
         </ListItem>

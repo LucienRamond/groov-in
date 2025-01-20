@@ -40,11 +40,19 @@ export default function Login() {
       }),
     })
       .then((response) => response.json())
-      .then((data) =>
-        data.message != "Login Successfully"
-          ? setErrorMessage(data.message)
-          : navigate("/")
-      );
+      .then((data) => {
+        if (data.message) {
+          return setErrorMessage(data.message);
+        } else {
+          console.log(data);
+        }
+
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ id: data.id, name: data.name })
+        );
+        navigate("/");
+      });
   };
 
   return (
