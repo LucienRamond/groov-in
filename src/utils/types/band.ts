@@ -1,8 +1,8 @@
-import { Profile } from "./profileType";
+import { ProfileType } from "./profileType";
 
-export interface Band {
+export interface BandType {
   id: number;
   name: string;
-  created_by: Profile;
-  members: Profile[];
+  created_by: ProfileType;
+  members: ProfileType[];
 }
