@@ -13,14 +13,16 @@ import {
 } from "@mui/material";
 import { ProfileType } from "../utils/types/profileType";
 import { ChevronDown, HandMetal } from "lucide-react";
+import { useNavigate } from "react-router";
 
 export default function ProfileComponent({
   profile,
 }: {
   profile: ProfileType;
 }) {
+  const navigate = useNavigate();
   return (
-    <Card className=" min-w-[500px] flex flex-col justify-between">
+    <Card className=" w-[500px] flex flex-col border justify-between">
       {/* TODO Add avatar for users profile */}
       <CardContent>
         <div className="p-2 border rounded-t shadow">
@@ -50,7 +52,11 @@ export default function ProfileComponent({
                       disablePadding
                       className={"border rounded bg-slate-100 "}
                     >
-                      <ListItemButton>{band.name}</ListItemButton>
+                      <ListItemButton
+                        onClick={() => navigate(`/bands/${band.id}`)}
+                      >
+                        {band.name}
+                      </ListItemButton>
                     </ListItem>
                   );
                 })}

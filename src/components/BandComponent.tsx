@@ -7,8 +7,10 @@ import {
 } from "@mui/material";
 
 import { BandType } from "../utils/types/band";
+import { useNavigate } from "react-router";
 
 export default function BandComponent({ band }: { band: BandType }) {
+  const navigate = useNavigate();
   return (
     <Card className=" min-w-[500px] p-2">
       <CardContent>
@@ -21,7 +23,11 @@ export default function BandComponent({ band }: { band: BandType }) {
       </CardContent>
 
       <CardActions className=" flex justify-center">
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => navigate(`/bands/${band.id}`)}
+        >
           View band
         </Button>
       </CardActions>
