@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BandType } from "../../utils/types/band";
+import { BandType } from "../../utils/types/bandTypes";
 import { useParams } from "react-router";
 import Page from "../../components/Page";
 import { Divider, Typography } from "@mui/material";
@@ -33,7 +33,7 @@ export default function Band() {
           {band?.name}
         </Typography>
         <Typography sx={{ fontStyle: "italic" }} className=" pb-2">
-          - Created by {band?.created_by.name} -
+          - Created by {band?.created_by[0].name} -
         </Typography>
         <Divider flexItem>
           <Typography variant={"h6"} sx={{ fontWeight: "bold" }}>
@@ -58,7 +58,7 @@ export default function Band() {
         </Divider>
         <div className=" grid grid-cols-2 gap-2">
           {band?.members.map((member) => {
-            return <ProfileComponent profile={member} />;
+            return <ProfileComponent id={member.id} />;
           })}
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import Page from "../../components/Page";
-import { BandType } from "../../utils/types/band";
+import { BandType } from "../../utils/types/bandTypes";
 import {
   Button,
   Dialog,
@@ -65,7 +65,7 @@ export default function MyBands() {
     >
       <div className=" grid grid-cols-2 gap-2 mt-2">
         {bands.map((band) => {
-          return <BandComponent key={band.id} band={band} />;
+          return <BandComponent key={band.id} id={band.id} />;
         })}
         <Button
           className=" w-[250px] col-span-2 justify-self-center"

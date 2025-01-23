@@ -1,4 +1,4 @@
-import { BandType } from "./band";
+import { BandType } from "./bandTypes";
 
 export interface ProfileType {
   id: number;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Page from "../../components/Page";
-import { BandType } from "../../utils/types/band";
+import { BandType } from "../../utils/types/bandTypes";
 import BandComponent from "../../components/BandComponent";
 
 export default function Bands() {
@@ -18,7 +18,7 @@ export default function Bands() {
       {/* TODO add sorting feature and search bar */}
       <div className=" grid grid-cols-2 gap-2 mt-2">
         {bands.map((band) => {
-          return <BandComponent key={band.id} band={band} />;
+          return <BandComponent key={band.id} id={band.id} />;
         })}
       </div>
     </Page>
