@@ -38,12 +38,10 @@ export default function Band() {
             Description
           </Typography>
         </Divider>
-        {/* TOD Add band description */}
         <Typography align="center" className=" py-2 w-[80%]">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum odit
-          nesciunt saepe rem, numquam veniam veritatis mollitia fuga tempora
-          officia inventore totam, eum unde enim, quasi ipsum odio possimus
-          minus.
+          {band?.description
+            ? band.description
+            : `Don't have a description yet :(`}
         </Typography>
         <Divider flexItem>
           <Typography

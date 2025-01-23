@@ -37,10 +37,9 @@ export default function Profile() {
         </Divider>
         {/* TOD Add user description */}
         <Typography align="center" className=" py-2 w-[80%]">
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum odit
-          nesciunt saepe rem, numquam veniam veritatis mollitia fuga tempora
-          officia inventore totam, eum unde enim, quasi ipsum odio possimus
-          minus.
+          {profile?.description
+            ? profile.description
+            : `Don't have a description yet :(`}
         </Typography>
         <Divider flexItem>
           <Typography

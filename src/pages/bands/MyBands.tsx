@@ -11,12 +11,14 @@ import {
   FormControl,
   InputLabel,
   OutlinedInput,
+  TextField,
 } from "@mui/material";
 import { useNavigate } from "react-router";
 import BandComponent from "../../components/BandComponent";
 
 interface Form extends HTMLFormElement {
   band_name: HTMLInputElement;
+  band_description: HTMLInputElement;
 }
 
 export default function MyBands() {
@@ -51,6 +53,7 @@ export default function MyBands() {
       },
       body: JSON.stringify({
         name: form.band_name.value,
+        description: form.band_description.value,
       }),
     })
       .then((response) => response.json())
@@ -99,10 +102,22 @@ export default function MyBands() {
             <InputLabel htmlFor="band_name">Band name</InputLabel>
             <OutlinedInput
               fullWidth
+              slotProps={{ input: { maxLength: 50 } }}
               id="band_name"
               label="Band name"
               type="text"
               required
+            />
+          </FormControl>
+          <FormControl>
+            <TextField
+              id="band_description"
+              label="Band description"
+              slotProps={{ htmlInput: { maxLength: 255 } }}
+              helperText="Maximum 255 characters"
+              minRows={3}
+              maxRows={6}
+              multiline
             />
           </FormControl>
         </DialogContent>
