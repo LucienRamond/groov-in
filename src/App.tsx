@@ -8,6 +8,7 @@ import Bands from "./pages/bands/Bands";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Band from "./pages/bands/Band";
+import Profile from "./pages/profiles/Profile";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/profiles" element={<Profiles />} />
+        <Route path="/profiles/:id" element={<Profile />} />
         <Route path="/bands/my-bands" element={<MyBands />} />
         <Route path="/bands" element={<Bands />} />
         <Route path="/bands/:id" element={<Band />} />

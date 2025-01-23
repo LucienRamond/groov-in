@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 
 import { BandType } from "../utils/types/bandTypes";
-import { NavLink, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 
@@ -56,7 +56,7 @@ export default function BandComponent({ id }: { id: number }) {
                       className={"border rounded bg-slate-100 "}
                     >
                       <ListItemButton
-                        onClick={() => navigate(`/user/${member.id}`)}
+                        onClick={() => navigate(`/profiles/${member.id}`)}
                       >
                         {member.name}
                       </ListItemButton>
@@ -88,9 +88,20 @@ export default function BandComponent({ id }: { id: number }) {
         }}
       >
         {/* TODO Add link to detailled profile page */}
-        <NavLink to={`/user/${band?.created_by[0].id}`}>
-          Created by {band?.created_by[0].name}
-        </NavLink>
+        Created by
+        <Button
+          variant="text"
+          sx={{
+            fontSize: "1rem",
+            paddingLeft: 0.5,
+            textTransform: "capitalize",
+            justifyContent: "start",
+          }}
+          className="italic"
+          onClick={() => navigate(`/profiles/${band?.created_by[0].id}`)}
+        >
+          {band?.created_by[0].name}
+        </Button>
       </Typography>
     </Card>
   );

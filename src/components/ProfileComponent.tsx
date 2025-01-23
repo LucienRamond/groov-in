@@ -73,7 +73,12 @@ export default function ProfileComponent({ id }: { id: number }) {
       </CardContent>
 
       <CardActions className=" flex justify-center">
-        <Button size="small">View profile</Button>
+        <Button
+          size="small"
+          onClick={() => navigate(`/profiles/${profile?.id}`)}
+        >
+          View profile
+        </Button>
       </CardActions>
     </Card>
   );

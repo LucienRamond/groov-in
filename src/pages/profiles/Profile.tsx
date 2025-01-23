@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { BandType } from "../../utils/types/bandTypes";
 import { useParams } from "react-router";
+import { ProfileType } from "../../utils/types/profileType";
 import Page from "../../components/Page";
 import { Divider, Typography } from "@mui/material";
-import ProfileComponent from "../../components/ProfileComponent";
+import BandComponent from "../../components/BandComponent";
 
-export default function Band() {
+export default function Profile() {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const { id } = useParams();
-  const [band, setBand] = useState<BandType>();
+  const [profile, setProfile] = useState<ProfileType>();
 
   useEffect(() => {
-    fetch(`${BASE_URL}/bands/${id}`)
+    fetch(`${BASE_URL}/user/${id}`)
       .then((response) => response.json())
-      .then((data) => !data.message && setBand(data));
+      .then((data) => !data.message && setProfile(data));
   }, [BASE_URL, id]);
 
   return (
@@ -28,17 +28,14 @@ export default function Band() {
           sx={{ fontWeight: "bold" }}
           className=" pb-4 "
         >
-          {band?.name}
-        </Typography>
-        <Typography sx={{ fontStyle: "italic" }} className=" pb-2">
-          - Created by {band?.created_by[0].name} -
+          {profile?.name}
         </Typography>
         <Divider flexItem>
           <Typography variant={"h6"} sx={{ fontWeight: "bold" }}>
             Description
           </Typography>
         </Divider>
-        {/* TOD Add band description */}
+        {/* TOD Add user description */}
         <Typography align="center" className=" py-2 w-[80%]">
           Lorem ipsum dolor, sit amet consectetur adipisicing elit. Illum odit
           nesciunt saepe rem, numquam veniam veritatis mollitia fuga tempora
@@ -51,12 +48,12 @@ export default function Band() {
             sx={{ fontWeight: "bold" }}
             className=" pb-2"
           >
-            Members
+            Bands
           </Typography>
         </Divider>
         <div className=" grid grid-cols-2 gap-2">
-          {band?.members.map((member) => {
-            return <ProfileComponent id={member.id} />;
+          {profile?.bands.map((band) => {
+            return <BandComponent id={band.id} />;
           })}
         </div>
       </div>
