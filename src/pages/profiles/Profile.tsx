@@ -52,7 +52,7 @@ export default function Profile() {
         </Divider>
         <div className=" grid grid-cols-2 gap-2">
           {profile?.bands.map((band) => {
-            return <BandComponent id={band.id} />;
+            return <BandComponent key={band.id} id={band.id} />;
           })}
         </div>
       </div>

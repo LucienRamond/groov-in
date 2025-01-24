@@ -55,6 +55,7 @@ export default function ProfileComponent({ id }: { id: number }) {
                 {profile?.bands.map((band) => {
                   return (
                     <ListItem
+                      key={band.id}
                       disablePadding
                       className={"border rounded bg-slate-100 "}
                     >

@@ -43,10 +43,7 @@ export default function Login() {
       .then((data) => {
         if (data.message) {
           return setErrorMessage(data.message);
-        } else {
-          console.log(data);
         }
-
         localStorage.setItem(
           "user",
           JSON.stringify({ id: data.id, name: data.name })

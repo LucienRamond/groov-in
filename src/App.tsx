@@ -9,6 +9,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Band from "./pages/bands/Band";
 import Profile from "./pages/profiles/Profile";
+import ProfileSettings from "./pages/profiles/settings/ProfileSettings";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/bands/:id" element={<Band />} />
         <Route path="/user/login" element={<Login />} />
         <Route path="/user/register" element={<Register />} />
+        <Route path="/user/settings" element={<ProfileSettings />} />
       </Routes>
     </BrowserRouter>
   );

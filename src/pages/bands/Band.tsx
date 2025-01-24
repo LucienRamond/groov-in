@@ -54,7 +54,7 @@ export default function Band() {
         </Divider>
         <div className=" grid grid-cols-2 gap-2">
           {band?.members.map((member) => {
-            return <ProfileComponent id={member.id} />;
+            return <ProfileComponent key={member.id} id={member.id} />;
           })}
         </div>
       </div>

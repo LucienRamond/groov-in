@@ -50,7 +50,7 @@ export default function UserNavBar({
         aria-expanded={open ? "true" : undefined}
         onClick={(e) => handleClick(e)}
       >
-        <ListItemText primary={`${user.name}`} />
+        <ListItemText sx={{ whiteSpace: "nowrap" }} primary={`${user.name}`} />
       </ListItemButton>
       <Menu
         id="settings-menu"
@@ -61,7 +61,12 @@ export default function UserNavBar({
           "aria-labelledby": "settings-button",
         }}
       >
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            navigate("/user/settings");
+            handleClose();
+          }}
+        >
           <ListItemIcon>
             <Settings />
           </ListItemIcon>

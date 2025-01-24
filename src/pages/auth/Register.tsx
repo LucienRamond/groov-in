@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import Page from "../../components/Page";
 import { useRef, useState } from "react";
+import { useNavigate } from "react-router";
 
 interface Form extends HTMLFormElement {
   username: HTMLInputElement;
@@ -17,6 +18,7 @@ interface Form extends HTMLFormElement {
 
 export default function Register() {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const navigate = useNavigate();
   const formRef = useRef<Form>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -41,7 +43,9 @@ export default function Register() {
     })
       .then((response) => response.json())
       .then((data) =>
-        data.message ? setErrorMessage(data.message) : console.log(data)
+        data.message != "Successfully signed up"
+          ? setErrorMessage(data.message)
+          : navigate("/user/login")
       );
   };
 
