@@ -45,7 +45,6 @@ export default function MyBands() {
 
   const createBand = () => {
     const form = formRef.current as Form;
-    console.log(form.band_name.value);
 
     fetch(`${BASE_URL}/bands/create`, {
       credentials: "include",

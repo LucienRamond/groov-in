@@ -13,6 +13,7 @@ import { PenLineIcon } from "lucide-react";
 import { useNavigate } from "react-router";
 import InstrumentsTransferList from "./InstrumentsTransferList";
 import { InstrumentType } from "../../../utils/types/instrumentTypes";
+import ResetPassword from "./ResetPassword";
 
 interface Form extends HTMLFormElement {
   username: HTMLInputElement;
@@ -141,14 +142,7 @@ export default function ProfileSettings() {
             instruments={instruments}
           />
         )}
-        <Button
-          onClick={(e) => {
-            e.preventDefault();
-          }}
-          variant="outlined"
-        >
-          Update password
-        </Button>
+        <ResetPassword user_id={profile.id} />
         <Button
           type="submit"
           onClick={(e) => {
