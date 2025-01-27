@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import { PenLineIcon } from "lucide-react";
 import { useNavigate } from "react-router";
+import InstrumentsTransferList from "./InstrumentsTransferList";
+import { InstrumentType } from "../../../utils/types/instrumentTypes";
 
 interface Form extends HTMLFormElement {
   username: HTMLInputElement;
@@ -22,10 +24,14 @@ export default function ProfileSettings() {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const formRef = useRef<Form>(null);
   const navigate = useNavigate();
+  const [instruments, setInstruments] = useState<InstrumentType[] | undefined>(
+    undefined
+  );
   const [profile, setProfile] = useState<ProfileType>({
     id: 0,
     name: "Name",
     description: "Description",
+    instruments: [],
     email: "Email",
     bands: [],
   });
@@ -36,10 +42,15 @@ export default function ProfileSettings() {
       credentials: "include",
     })
       .then((response) => response.json())
-      .then((data) => !data.message && setProfile(data));
+      .then((data) => {
+        if (!data.message) {
+          setProfile(data);
+          setInstruments(data.instruments);
+        }
+      });
   }, [BASE_URL]);
 
-  const handleForm = () => {
+  const handleForm = async () => {
     const form = formRef.current as Form;
     fetch(`${BASE_URL}/user/edit`, {
       credentials: "include",
@@ -115,13 +126,21 @@ export default function ProfileSettings() {
             helperText="Maximum 255 characters"
             minRows={3}
             maxRows={6}
-            value={!profile.description ? `${profile?.description}` : ""}
+            value={profile.description ? `${profile?.description}` : ""}
             onChange={(e) =>
               profile && setProfile({ ...profile, description: e.target.value })
             }
             multiline
           />
         </FormControl>
+        {instruments && (
+          <InstrumentsTransferList
+            setInstruments={(new_instruments_list: InstrumentType[]) =>
+              setInstruments(new_instruments_list)
+            }
+            instruments={instruments}
+          />
+        )}
         <Button
           onClick={(e) => {
             e.preventDefault();
