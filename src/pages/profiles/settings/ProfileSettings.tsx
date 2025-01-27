@@ -53,6 +53,8 @@ export default function ProfileSettings() {
 
   const handleForm = async () => {
     const form = formRef.current as Form;
+    const new_instruments = instruments?.map((instrument) => instrument.id);
+
     fetch(`${BASE_URL}/user/edit`, {
       credentials: "include",
       method: "PATCH",
@@ -64,6 +66,7 @@ export default function ProfileSettings() {
         name: form.username.value,
         email: form.email.value,
         description: form.description.value,
+        instruments: new_instruments,
       }),
     })
       .then((response) => response.json())
@@ -72,7 +75,6 @@ export default function ProfileSettings() {
           "user",
           JSON.stringify({ id: data.id, name: data.name })
         );
-        navigate("/");
       });
     return navigate("/");
   };
