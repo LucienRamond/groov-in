@@ -26,7 +26,6 @@ export default function MyBands() {
   const navigate = useNavigate();
   const [onCreatingBand, setOnCreatingBand] = useState<boolean>(false);
   const formRef = useRef<Form>(null);
-
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   const handleClose = () => {
@@ -34,12 +33,15 @@ export default function MyBands() {
   };
 
   useEffect(() => {
+    if (!localStorage.getItem("user")) {
+      navigate("/user/login");
+    }
     fetch(`${BASE_URL}/bands/my-bands`, {
       credentials: "include",
     })
       .then((response) => response.json())
       .then((data) => !data.message && setBands(data));
-  }, [BASE_URL]);
+  }, [BASE_URL, navigate]);
 
   const createBand = () => {
     const form = formRef.current as Form;
@@ -70,6 +72,7 @@ export default function MyBands() {
         {bands.map((band) => {
           return <BandComponent key={band.id} id={band.id} />;
         })}
+
         <Button
           className=" w-[250px] col-span-2 justify-self-center"
           variant="contained"
