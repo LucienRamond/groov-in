@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { ProfileType } from "../../../utils/types/profileType";
 import Page from "../../../components/Page";
 import {
@@ -14,6 +14,7 @@ import { useNavigate } from "react-router";
 import InstrumentsTransferList from "./InstrumentsTransferList";
 import { InstrumentType } from "../../../utils/types/instrumentTypes";
 import ResetPassword from "./ResetPassword";
+import { ToastContext } from "../../providers/toastContext";
 
 interface Form extends HTMLFormElement {
   username: HTMLInputElement;
@@ -24,6 +25,8 @@ interface Form extends HTMLFormElement {
 export default function ProfileSettings() {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const formRef = useRef<Form>(null);
+  const { toggleToast } = useContext(ToastContext);
+
   const navigate = useNavigate();
   const [instruments, setInstruments] = useState<InstrumentType[] | undefined>(
     undefined
@@ -76,6 +79,11 @@ export default function ProfileSettings() {
           JSON.stringify({ id: data.id, name: data.name })
         );
       });
+
+    toggleToast({
+      title: "Profile",
+      description: "successfully updated !",
+    });
     return navigate("/");
   };
 

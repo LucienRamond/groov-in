@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import Page from "../../components/Page";
 import { BandType } from "../../utils/types/bandTypes";
 import {
@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router";
 import BandComponent from "../../components/BandComponent";
+import { ToastContext } from "../providers/toastContext";
 
 interface Form extends HTMLFormElement {
   band_name: HTMLInputElement;
@@ -23,6 +24,8 @@ interface Form extends HTMLFormElement {
 
 export default function MyBands() {
   const [bands, setBands] = useState<Array<BandType>>([]);
+  const { toggleToast } = useContext(ToastContext);
+
   const navigate = useNavigate();
   const [onCreatingBand, setOnCreatingBand] = useState<boolean>(false);
   const formRef = useRef<Form>(null);
@@ -58,7 +61,10 @@ export default function MyBands() {
       }),
     })
       .then((response) => response.json())
-      .then(() => navigate("/bands/my-bands"));
+      .then(() => {
+        toggleToast({ title: "Band", description: "successfully created !" });
+        navigate("/bands/my-bands");
+      });
   };
 
   return (
