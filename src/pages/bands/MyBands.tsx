@@ -63,7 +63,7 @@ export default function MyBands() {
       .then((response) => response.json())
       .then(() => {
         toggleToast({ title: "Band", description: "successfully created !" });
-        navigate("/bands/my-bands");
+        navigate("/my-bands");
       });
   };
 

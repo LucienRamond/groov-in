@@ -1,4 +1,5 @@
 import {
+  Button,
   List,
   ListItem,
   ListItemButton,
@@ -6,11 +7,10 @@ import {
   ListItemText,
 } from "@mui/material";
 import { CirclePause, CirclePlay } from "lucide-react";
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import ToggleTheme from "../theme/ToggleTheme";
 import { useEffect, useState } from "react";
 import UserNavBar from "./UserNavBar";
-
 export interface User {
   id: number;
   name: string;
@@ -32,7 +32,7 @@ export default function Navbar() {
 
   return (
     <div className=" flex justify-between border-b border-[var(--color)] bg-[var(--secondary-background-color)]">
-      <List className=" flex">
+      <List className=" flex" disablePadding>
         <ListItem>
           <ListItemIcon className=" flex justify-center">
             <div className=" flex gap-[2px]">
@@ -43,25 +43,69 @@ export default function Navbar() {
             </div>
           </ListItemIcon>
         </ListItem>
-        <ListItem disablePadding disableGutters>
-          <ListItemButton onClick={() => navigate("/")}>
-            <ListItemText primary="Home" />
-          </ListItemButton>
+        <ListItem disablePadding>
+          <Button>
+            <NavLink
+              to={"/"}
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "active bg-[var(--color)] text-[var(--secondary-background-color)] font-bold p-2 rounded min-w-[90px]"
+                  : "active text-[var(--color)] font-bold p-2 rounded min-w-[90px]"
+              }
+            >
+              Home
+            </NavLink>
+          </Button>
         </ListItem>
-        <ListItem disablePadding disableGutters>
-          <ListItemButton onClick={() => navigate("/profiles")}>
-            <ListItemText primary="Profiles" />
-          </ListItemButton>
+        <ListItem disablePadding>
+          <Button>
+            <NavLink
+              to={"/profiles"}
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "active bg-[var(--color)] text-[var(--secondary-background-color)] font-bold p-2 rounded min-w-[90px]"
+                  : "active text-[var(--color)] font-bold p-2 rounded min-w-[90px]"
+              }
+            >
+              Profiles
+            </NavLink>
+          </Button>
         </ListItem>
-        <ListItem disablePadding disableGutters>
-          <ListItemButton onClick={() => navigate("/bands/my-bands")}>
-            <ListItemText primary="MyBands" />
-          </ListItemButton>
+        <ListItem disablePadding>
+          <Button>
+            <NavLink
+              to={"/bands"}
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "active bg-[var(--color)] text-[var(--secondary-background-color)] font-bold p-2 rounded min-w-[90px]"
+                  : "active text-[var(--color)] font-bold p-2 rounded min-w-[90px]"
+              }
+            >
+              Bands
+            </NavLink>
+          </Button>
         </ListItem>
-        <ListItem disablePadding disableGutters>
-          <ListItemButton onClick={() => navigate("/bands")}>
-            <ListItemText primary="Bands" />
-          </ListItemButton>
+        <ListItem disablePadding>
+          <Button>
+            <NavLink
+              to={"/my-bands"}
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "pending"
+                  : isActive
+                  ? "active bg-[var(--color)] text-[var(--secondary-background-color)] font-bold p-2 rounded min-w-[90px]"
+                  : "active text-[var(--color)] font-bold p-2 rounded min-w-[90px]"
+              }
+            >
+              My&nbsp;bands
+            </NavLink>
+          </Button>
         </ListItem>
       </List>
 

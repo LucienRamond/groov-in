@@ -20,7 +20,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/profiles" element={<Profiles />} />
         <Route path="/profiles/:id" element={<Profile />} />
-        <Route path="/bands/my-bands" element={<MyBands />} />
+        <Route path="/my-bands" element={<MyBands />} />
         <Route path="/bands" element={<Bands />} />
         <Route path="/bands/:id" element={<Band />} />
         <Route path="/bands/edit/:id" element={<EditBand />} />
