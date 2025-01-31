@@ -16,8 +16,15 @@ import { BandType } from "../utils/types/bandTypes";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
+import EditBand from "../pages/bands/EditBand";
 
-export default function BandComponent({ id }: { id: number }) {
+export default function BandComponent({
+  id,
+  edit,
+}: {
+  id: number;
+  edit?: boolean;
+}) {
   const [band, setBand] = useState<BandType | undefined>(undefined);
   const navigate = useNavigate();
   const BASE_URL = import.meta.env.VITE_BASE_URL;
@@ -29,7 +36,7 @@ export default function BandComponent({ id }: { id: number }) {
   }, [BASE_URL, id]);
 
   return (
-    <Card className=" min-w-[500px] p-2">
+    <Card className=" min-w-[500px] p-2 grid">
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {band?.name}
@@ -70,40 +77,43 @@ export default function BandComponent({ id }: { id: number }) {
         </Accordion>
         {/* TODO Add a count of users who  like the band */}
       </CardContent>
-
-      <CardActions className=" flex justify-center">
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => navigate(`/bands/${band?.id}`)}
-        >
-          View band
-        </Button>
-      </CardActions>
-      <Typography
-        variant="body2"
-        sx={{
-          color: "text.secondary",
-          fontStyle: "italic",
-          textAlign: "left",
-        }}
-      >
-        {/* TODO Add link to detailled profile page */}
-        Created by
-        <Button
-          variant="text"
+      <div className="flex flex-col justify-end">
+        <CardActions className=" flex justify-center">
+          <Button
+            size="small"
+            color="primary"
+            variant="outlined"
+            onClick={() => navigate(`/bands/${band?.id}`)}
+          >
+            View band
+          </Button>
+          {edit && <EditBand band_data={band} />}
+        </CardActions>
+        <Typography
+          variant="body2"
           sx={{
-            fontSize: "1rem",
-            paddingLeft: 0.5,
-            textTransform: "capitalize",
-            justifyContent: "start",
+            color: "text.secondary",
+            fontStyle: "italic",
+            textAlign: "left",
           }}
-          className="italic"
-          onClick={() => navigate(`/profiles/${band?.created_by[0].id}`)}
         >
-          {band?.created_by[0].name}
-        </Button>
-      </Typography>
+          {/* TODO Add link to detailled profile page */}
+          Created by
+          <Button
+            variant="text"
+            sx={{
+              fontSize: "1rem",
+              paddingLeft: 0.5,
+              textTransform: "capitalize",
+              justifyContent: "start",
+            }}
+            className="italic"
+            onClick={() => navigate(`/profiles/${band?.created_by[0].id}`)}
+          >
+            {band?.created_by[0].name}
+          </Button>
+        </Typography>
+      </div>
     </Card>
   );
 }

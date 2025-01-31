@@ -10,6 +10,7 @@ import Register from "./pages/auth/Register";
 import Band from "./pages/bands/Band";
 import Profile from "./pages/profiles/Profile";
 import ProfileSettings from "./pages/profiles/settings/ProfileSettings";
+import EditBand from "./pages/bands/EditBand";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/bands/my-bands" element={<MyBands />} />
         <Route path="/bands" element={<Bands />} />
         <Route path="/bands/:id" element={<Band />} />
+        <Route path="/bands/edit/:id" element={<EditBand />} />
         <Route path="/user/login" element={<Login />} />
         <Route path="/user/register" element={<Register />} />
         <Route path="/user/settings" element={<ProfileSettings />} />

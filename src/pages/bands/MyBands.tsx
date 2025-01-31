@@ -25,11 +25,11 @@ interface Form extends HTMLFormElement {
 export default function MyBands() {
   const [bands, setBands] = useState<Array<BandType>>([]);
   const { toggleToast } = useContext(ToastContext);
-
   const navigate = useNavigate();
   const [onCreatingBand, setOnCreatingBand] = useState<boolean>(false);
   const formRef = useRef<Form>(null);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
+  const user = localStorage.getItem("user");
 
   const handleClose = () => {
     setOnCreatingBand(false);
@@ -67,6 +67,17 @@ export default function MyBands() {
       });
   };
 
+  const isEditable = (creator_id: number) => {
+    if (!user) {
+      return false;
+    }
+    if (JSON.parse(user).id == creator_id) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <Page
       title={`You're playing in ${bands.length} band${
@@ -75,7 +86,13 @@ export default function MyBands() {
     >
       <div className=" grid grid-cols-2 gap-2 mt-2">
         {bands.map((band) => {
-          return <BandComponent key={band.id} id={band.id} />;
+          return (
+            <BandComponent
+              key={band.id}
+              id={band.id}
+              edit={isEditable(band.created_by[0].id)}
+            />
+          );
         })}
 
         <Button
