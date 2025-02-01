@@ -12,9 +12,10 @@ import {
   ListItem,
 } from "@mui/material";
 import { ProfileType } from "../utils/types/profileType";
-import { ChevronDown, HandMetal } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
+import ProfileAvatar from "./ProfileAvatar";
 
 export default function ProfileComponent({ id }: { id: number }) {
   const [profile, setProfile] = useState<ProfileType | undefined>(undefined);
@@ -29,13 +30,43 @@ export default function ProfileComponent({ id }: { id: number }) {
 
   return (
     <Card className=" w-[500px] flex flex-col border justify-between">
-      {/* TODO Add avatar for users profile */}
       <CardContent>
-        <div className="p-2 border rounded-t shadow">
-          <HandMetal className=" mx-auto" />
-          <Typography gutterBottom variant="h5" component="div">
-            {profile?.name}
-          </Typography>
+        <div className="p-4 flex items-center gap-4 border rounded-t shadow">
+          <ProfileAvatar name={profile?.name} />
+          <div className=" w-full">
+            <Typography
+              className={`border-b border-[var(--secondary-background-color)]
+                text-left text-[var(--secondary-background-color)]`}
+              variant="h5"
+            >
+              {profile?.name}
+            </Typography>
+            {profile?.instruments.length ? (
+              <div className=" flex">
+                {profile?.instruments.map((instrument, index) => {
+                  return (
+                    <Typography
+                      className={` italic text-[var(--secondary-background-color)] ${
+                        index != 0 && " lowercase"
+                      }`}
+                      gutterBottom
+                      variant="subtitle1"
+                    >
+                      {instrument.name}
+                      {index != profile.instruments.length - 1 && ","}&nbsp;
+                    </Typography>
+                  );
+                })}
+              </div>
+            ) : (
+              <Typography
+                className="text-left"
+                color="var(--secondary-background-color)"
+              >
+                No instruments
+              </Typography>
+            )}
+          </div>
         </div>
 
         <Accordion
