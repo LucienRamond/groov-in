@@ -46,6 +46,7 @@ export default function ProfileComponent({ id }: { id: number }) {
                 {profile?.instruments.map((instrument, index) => {
                   return (
                     <Typography
+                      key={index}
                       className={` italic text-[var(--secondary-background-color)] ${
                         index != 0 && " lowercase"
                       }`}

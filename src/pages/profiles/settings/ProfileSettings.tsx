@@ -11,10 +11,10 @@ import {
 } from "@mui/material";
 import { PenLineIcon } from "lucide-react";
 import { useNavigate } from "react-router";
-import InstrumentsTransferList from "./InstrumentsTransferList";
 import { InstrumentType } from "../../../utils/types/instrumentTypes";
 import ResetPassword from "./ResetPassword";
 import { ToastContext } from "../../providers/toastContext";
+import InstrumentsSelect from "./InstrumentsSelect";
 
 interface Form extends HTMLFormElement {
   username: HTMLInputElement;
@@ -28,7 +28,7 @@ export default function ProfileSettings() {
   const { toggleToast } = useContext(ToastContext);
 
   const navigate = useNavigate();
-  const [instruments, setInstruments] = useState<InstrumentType[] | undefined>(
+  const [instruments, setInstruments] = useState<number[] | undefined>(
     undefined
   );
   const [profile, setProfile] = useState<ProfileType>({
@@ -49,14 +49,17 @@ export default function ProfileSettings() {
       .then((data) => {
         if (!data.message) {
           setProfile(data);
-          setInstruments(data.instruments);
+          const current_instruments: number[] = [];
+          data.instruments.forEach((instrument: InstrumentType) => {
+            return current_instruments.push(instrument.id);
+          });
+          setInstruments(current_instruments);
         }
       });
   }, [BASE_URL]);
 
   const handleForm = async () => {
     const form = formRef.current as Form;
-    const new_instruments = instruments?.map((instrument) => instrument.id);
 
     fetch(`${BASE_URL}/user/edit`, {
       credentials: "include",
@@ -69,7 +72,7 @@ export default function ProfileSettings() {
         name: form.username.value,
         email: form.email.value,
         description: form.description.value,
-        instruments: new_instruments,
+        instruments: instruments,
       }),
     })
       .then((response) => response.json())
@@ -145,11 +148,11 @@ export default function ProfileSettings() {
           />
         </FormControl>
         {instruments && (
-          <InstrumentsTransferList
-            // setInstruments={(new_instruments_list: InstrumentType[]) =>
-            //   setInstruments(new_instruments_list)
-            // }
+          <InstrumentsSelect
             instruments={instruments}
+            setInstruments={(new_instruments_list) =>
+              setInstruments(new_instruments_list)
+            }
           />
         )}
         <ResetPassword user_id={profile.id} />
