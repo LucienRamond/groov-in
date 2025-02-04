@@ -35,7 +35,6 @@ export default function Profile() {
             Description
           </Typography>
         </Divider>
-        {/* TOD Add user description */}
         <Typography align="center" className=" py-2 w-[80%]">
           {profile?.description
             ? profile.description

@@ -146,9 +146,9 @@ export default function ProfileSettings() {
         </FormControl>
         {instruments && (
           <InstrumentsTransferList
-            setInstruments={(new_instruments_list: InstrumentType[]) =>
-              setInstruments(new_instruments_list)
-            }
+            // setInstruments={(new_instruments_list: InstrumentType[]) =>
+            //   setInstruments(new_instruments_list)
+            // }
             instruments={instruments}
           />
         )}

@@ -21,12 +21,12 @@ function intersection(
 }
 
 type InstrumentsTransferListType = {
-  setProfile: () => void;
+  // setProfile: () => void;
   instruments: InstrumentType[];
 };
 
 export default function InstrumentsTransferList({
-  setInstruments,
+  // setInstruments,
   instruments,
 }: InstrumentsTransferListType) {
   const [checked, setChecked] = useState<readonly InstrumentType[]>([]);
@@ -44,7 +44,9 @@ export default function InstrumentsTransferList({
         setLeft(data);
         setRight(instruments);
       });
-  }, [BASE_URL]);
+  }, [BASE_URL, instruments]);
+
+  console.log("ok");
 
   const handleToggle = (value: InstrumentType) => () => {
     const currentIndex = checked.indexOf(value);
