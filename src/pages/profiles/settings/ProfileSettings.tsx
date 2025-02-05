@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { ProfileType } from "../../../utils/types/profileType";
 import Page from "../../../components/Page";
 import {
@@ -8,13 +8,15 @@ import {
   Button,
   TextField,
   InputAdornment,
+  styled,
 } from "@mui/material";
-import { PenLineIcon } from "lucide-react";
+import { ImagePlusIcon, PenLineIcon } from "lucide-react";
 import { useNavigate } from "react-router";
 import { InstrumentType } from "../../../utils/types/instrumentTypes";
 import ResetPassword from "./ResetPassword";
 import { ToastContext } from "../../providers/toastContext";
 import InstrumentsSelect from "./InstrumentsSelect";
+import ProfileAvatar from "../../../components/ProfileAvatar";
 
 interface Form extends HTMLFormElement {
   username: HTMLInputElement;
@@ -40,6 +42,7 @@ export default function ProfileSettings() {
     bands: [],
   });
   const [updateEmail, setUpdateEmail] = useState<boolean>(false);
+  const [avatarImg, setAvatarImg] = useState<string>("");
 
   useEffect(() => {
     fetch(`${BASE_URL}/user/@me`, {
@@ -90,47 +93,89 @@ export default function ProfileSettings() {
     return navigate("/");
   };
 
+  const uploadImg = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setAvatarImg(URL.createObjectURL(e.target.files[0]));
+    }
+  };
+
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  });
+
   return (
     <Page title="Settings">
       <form
         ref={formRef}
-        className=" bg-white border border-black border-t-0 p-4 rounded-xl rounded-t-none grid gap-4 min-w-[500px] items-center"
+        className=" bg-white border border-black min-w-[600px] p-4 rounded-xl mt-2 grid  gap-4 items-center"
       >
-        <FormControl>
-          <InputLabel htmlFor="username">Name</InputLabel>
-          <OutlinedInput
-            id="username"
-            label="Name"
-            value={profile?.name}
-            onChange={(e) =>
-              profile && setProfile({ ...profile, name: e.target.value })
-            }
-          />
-        </FormControl>
-        <FormControl>
-          <InputLabel htmlFor="email">Email</InputLabel>
-          <OutlinedInput
-            id="email"
-            label="Email"
-            type="email"
-            disabled={!updateEmail}
-            required
-            value={profile?.email}
-            onChange={(e) =>
-              profile && setProfile({ ...profile, email: e.target.value })
-            }
-            endAdornment={
-              <InputAdornment position="end">
-                <Button
-                  onClick={() => setUpdateEmail(!updateEmail)}
-                  sx={{ justifyContent: "end" }}
-                >
-                  <PenLineIcon />
-                </Button>
-              </InputAdornment>
-            }
-          />
-        </FormControl>
+        <div className="grid grid-cols-[min-content,1fr] gap-4">
+          <div className="relative p-4 border border-gray-400 hover:border-black rounded">
+            <ProfileAvatar
+              image={avatarImg}
+              name={profile?.name}
+              size="large"
+            />
+            <Button
+              component="label"
+              sx={{
+                position: "absolute",
+                padding: 0,
+                justifyContent: "end",
+              }}
+              className=" bottom-0 right-0"
+            >
+              <ImagePlusIcon className=" m-2" />
+              <VisuallyHiddenInput type="file" onChange={(e) => uploadImg(e)} />
+            </Button>
+          </div>
+
+          <div className=" grid gap-4">
+            <FormControl>
+              <InputLabel htmlFor="username">Name</InputLabel>
+              <OutlinedInput
+                id="username"
+                label="Name"
+                value={profile?.name}
+                onChange={(e) =>
+                  profile && setProfile({ ...profile, name: e.target.value })
+                }
+              />
+            </FormControl>
+            <FormControl>
+              <InputLabel htmlFor="email">Email</InputLabel>
+              <OutlinedInput
+                id="email"
+                label="Email"
+                type="email"
+                disabled={!updateEmail}
+                required
+                value={profile?.email}
+                onChange={(e) =>
+                  profile && setProfile({ ...profile, email: e.target.value })
+                }
+                endAdornment={
+                  <InputAdornment position="end">
+                    <Button
+                      onClick={() => setUpdateEmail(!updateEmail)}
+                      sx={{ justifyContent: "end" }}
+                    >
+                      <PenLineIcon />
+                    </Button>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </div>
+        </div>
 
         <FormControl>
           <TextField
