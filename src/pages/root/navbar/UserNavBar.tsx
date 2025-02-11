@@ -6,7 +6,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import { User } from "./Navbar";
+import { User } from "./BrowserNavbar";
 import { useState } from "react";
 import { LogOutIcon, Settings } from "lucide-react";
 

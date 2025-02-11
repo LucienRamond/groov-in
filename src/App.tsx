@@ -1,7 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import "./App.css";
 import Home from "./pages/home/Home";
-import Navbar from "./pages/root/navbar/Navbar";
 import Profiles from "./pages/profiles/Profiles";
 import MyBands from "./pages/bands/MyBands";
 import Bands from "./pages/bands/Bands";
@@ -11,6 +10,7 @@ import Band from "./pages/bands/Band";
 import Profile from "./pages/profiles/Profile";
 import ProfileSettings from "./pages/profiles/settings/ProfileSettings";
 import EditBand from "./pages/bands/EditBand";
+import Navbar from "./pages/root/navbar/Navbar";
 
 function App() {
   return (
