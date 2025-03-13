@@ -20,7 +20,7 @@ export default function Profile() {
     <Page>
       <div
         className={
-          "p-4  flex items-center flex-col   text-[var(--secondary-background-color)]"
+          "p-4 w-full flex items-center flex-col   text-[var(--secondary-background-color)]"
         }
       >
         <Typography
@@ -49,7 +49,7 @@ export default function Profile() {
             Bands
           </Typography>
         </Divider>
-        <div className=" grid grid-cols-2 gap-2">
+        <div className="w-full grid sm:grid-cols-2 xl:grid-cols-3 gap-2">
           {profile?.bands.map((band) => {
             return <BandComponent key={band.id} id={band.id} />;
           })}

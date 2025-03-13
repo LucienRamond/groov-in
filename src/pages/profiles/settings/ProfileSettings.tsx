@@ -42,7 +42,7 @@ export default function ProfileSettings() {
     bands: [],
   });
   const [updateEmail, setUpdateEmail] = useState<boolean>(false);
-  const [avatarImg, setAvatarImg] = useState<string>("");
+  const [profilePicture, setProfilePicture] = useState<string>("");
 
   useEffect(() => {
     fetch(`${BASE_URL}/user/@me`, {
@@ -95,7 +95,7 @@ export default function ProfileSettings() {
 
   const uploadImg = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setAvatarImg(URL.createObjectURL(e.target.files[0]));
+      setProfilePicture(URL.createObjectURL(e.target.files[0]));
     }
   };
 
@@ -112,15 +112,15 @@ export default function ProfileSettings() {
   });
 
   return (
-    <Page title="Settings">
+    <Page>
       <form
         ref={formRef}
-        className=" bg-white border border-black min-w-[600px] p-4 rounded-xl mt-2 grid  gap-4 items-center"
+        className=" bg-white border p-4  mt-4 grid gap-4 w-full items-center max-w-[500px]"
       >
-        <div className="grid grid-cols-[min-content,1fr] gap-4">
-          <div className="relative p-4 border border-gray-400 hover:border-black rounded">
+        <div className="grid sm:grid-cols-[min-content,1fr] gap-4">
+          <div className="relative p-4 border w-fit mx-auto border-gray-400 hover:border-black rounded">
             <ProfileAvatar
-              image={avatarImg}
+              profile_picture={profilePicture}
               name={profile?.name}
               size="large"
             />

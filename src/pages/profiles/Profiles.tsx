@@ -14,8 +14,8 @@ export default function Profiles() {
   }, [BASE_URL]);
 
   return (
-    <Page title="Profiles">
-      <div className="  grid grid-cols-2 gap-2 mt-2">
+    <Page>
+      <div className=" w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-2 mt-2">
         {profiles.map((profile: ProfileType) => {
           return <ProfileComponent key={profile.id} id={profile.id} />;
         })}

@@ -79,11 +79,7 @@ export default function MyBands() {
   };
 
   return (
-    <Page
-      title={`You're playing in ${bands.length} band${
-        bands.length > 1 ? "s" : ""
-      } !`}
-    >
+    <Page>
       <div className=" grid grid-cols-2 gap-2 mt-2">
         {bands.map((band) => {
           return (

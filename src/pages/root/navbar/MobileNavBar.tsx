@@ -40,7 +40,7 @@ export default function MobileNavbar() {
   }, [navigate]);
 
   return (
-    <div className=" flex justify-between border-b border-[var(--color)] bg-[var(--secondary-background-color)]">
+    <div className="z-50 flex justify-between border-b border-[var(--color)] bg-[var(--secondary-background-color)]">
       <List className=" flex" disablePadding>
         <ListItem>
           <ListItemIcon className=" flex justify-center">
@@ -79,15 +79,15 @@ export default function MobileNavbar() {
         sx={{
           display: "grid",
           gridTemplateColumns: "repeat(4, 1fr)",
-          justifyContent: "",
           position: "fixed",
           bottom: 0,
           left: 0,
           right: 0,
+          borderRadius: 0,
           backgroundColor: "var(--secondary-background-color)",
         }}
         elevation={3}
-        className=" justify-center"
+        className=" z-50 justify-center border-t border-[var(--color)]"
       >
         <Button sx={{ padding: 0, width: "full" }}>
           <NavLink
@@ -102,7 +102,7 @@ export default function MobileNavbar() {
           >
             <div className=" grid justify-items-center">
               <HomeIcon />
-              <Typography>Home</Typography>
+              <Typography fontSize={".8rem"}>Home</Typography>
             </div>
           </NavLink>
         </Button>
@@ -119,7 +119,7 @@ export default function MobileNavbar() {
           >
             <div className=" grid justify-items-center">
               <FastForwardIcon />
-              <Typography>Bands</Typography>
+              <Typography fontSize={".8rem"}>Bands</Typography>
             </div>
           </NavLink>
         </Button>
@@ -136,7 +136,7 @@ export default function MobileNavbar() {
           >
             <div className=" grid justify-items-center">
               <UsersIcon />
-              <Typography>Profiles</Typography>
+              <Typography fontSize={".8rem"}>Profiles</Typography>
             </div>
           </NavLink>
         </Button>
@@ -147,13 +147,13 @@ export default function MobileNavbar() {
               isPending
                 ? "pending"
                 : isActive
-                ? "active w-full  bg-[var(--color)]  text-[var(--secondary-background-color)] font-bold p-2 min-w-[90px]"
-                : "active w-full  text-[var(--color)] font-bold p-2 min-w-[90px]"
+                ? "active w-full h-full bg-[var(--color)]  text-[var(--secondary-background-color)] font-bold p-2 min-w-[90px]"
+                : "active w-full h-full text-[var(--color)] font-bold p-2 min-w-[90px]"
             }
           >
             <div className=" grid justify-items-center">
               <PlayIcon />
-              <Typography>My bands</Typography>
+              <Typography fontSize={".8rem"}>My bands</Typography>
             </div>
           </NavLink>
         </Button>

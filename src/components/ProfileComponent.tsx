@@ -29,9 +29,9 @@ export default function ProfileComponent({ id }: { id: number }) {
   }, [BASE_URL, id]);
 
   return (
-    <Card className=" w-[500px] flex flex-col border justify-between">
-      <CardContent>
-        <div className="p-4 flex items-center gap-4 border rounded-t shadow">
+    <Card square className="w-[100%] z-10 grid border">
+      <CardContent sx={{ padding: 0 }}>
+        <div className="p-2 flex items-center gap-4">
           <ProfileAvatar name={profile?.name} />
           <div className=" w-full">
             <Typography
@@ -70,12 +70,11 @@ export default function ProfileComponent({ id }: { id: number }) {
           </div>
         </div>
 
-        <Accordion
-          disableGutters
-          className="border border-t-0"
-          disabled={!profile?.bands.length}
-        >
-          <AccordionSummary expandIcon={<ChevronDown />}>
+        <Accordion square disableGutters disabled={!profile?.bands.length}>
+          <AccordionSummary
+            sx={{ backgroundColor: "rgb(241 245 249)" }}
+            expandIcon={<ChevronDown />}
+          >
             <Typography component={"span"}>Bands</Typography>
             <Typography sx={{ marginLeft: "1rem" }} component={"span"}>
               ({profile?.bands.length})

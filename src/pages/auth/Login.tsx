@@ -53,10 +53,10 @@ export default function Login() {
   };
 
   return (
-    <Page title="Login">
+    <Page>
       <form
         ref={formRef}
-        className=" bg-white border border-black border-t-0 p-4 rounded-xl rounded-t-none grid gap-4 min-w-[500px] items-center"
+        className=" bg-white border p-4 mt-4 grid gap-4 w-full items-center max-w-[500px]"
       >
         <FormControl>
           <InputLabel htmlFor="email">Email</InputLabel>

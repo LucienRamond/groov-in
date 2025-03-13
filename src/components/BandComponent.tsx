@@ -36,18 +36,23 @@ export default function BandComponent({
   }, [BASE_URL, id]);
 
   return (
-    <Card className=" min-w-[500px] p-2 grid">
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
+    <Card square className="w-[100%] z-10 grid border">
+      <CardContent sx={{ padding: 0 }}>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          sx={{ fontWeight: "bold" }}
+          className=" p-4 text-[var(--secondary-background-color)]"
+        >
           {band?.name}
         </Typography>
 
-        <Accordion
-          disableGutters
-          className="border border-t-0"
-          disabled={!band?.members.length}
-        >
-          <AccordionSummary expandIcon={<ChevronDown />}>
+        <Accordion square disableGutters disabled={!band?.members.length}>
+          <AccordionSummary
+            expandIcon={<ChevronDown />}
+            sx={{ backgroundColor: "rgb(241 245 249)" }}
+          >
             <Typography component={"span"}>Members</Typography>
             <Typography sx={{ marginLeft: "1rem" }} component={"span"}>
               ({band?.members.length})
@@ -77,7 +82,7 @@ export default function BandComponent({
         </Accordion>
         {/* TODO Add a count of users who  like the band */}
       </CardContent>
-      <div className="flex flex-col justify-end">
+      <div className="flex flex-col pt-2 justify-end">
         <CardActions className=" flex justify-center">
           <Button
             size="small"
