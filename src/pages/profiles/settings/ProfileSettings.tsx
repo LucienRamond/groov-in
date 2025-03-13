@@ -8,7 +8,6 @@ import {
   Button,
   TextField,
   InputAdornment,
-  styled,
 } from "@mui/material";
 import { ImagePlusIcon, PenLineIcon } from "lucide-react";
 import { useNavigate } from "react-router";
