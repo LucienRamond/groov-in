@@ -42,7 +42,7 @@ export default function ProfileSettings() {
     bands: [],
   });
   const [updateEmail, setUpdateEmail] = useState<boolean>(false);
-  const [profilePicture, setProfilePicture] = useState<string>("");
+  const [profilePicture, setProfilePicture] = useState<string | undefined>("");
 
   useEffect(() => {
     fetch(`${BASE_URL}/user/@me`, {
