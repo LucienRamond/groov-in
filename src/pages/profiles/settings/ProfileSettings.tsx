@@ -139,7 +139,8 @@ export default function ProfileSettings() {
         <div className="grid sm:grid-cols-[min-content,1fr] gap-4">
           <div className="relative p-4 border w-fit mx-auto border-gray-400 hover:border-black rounded">
             <ProfileAvatar
-              profile_picture={profilePicture}
+              profile_picture={profile.avatar_img}
+              new_profile_picture={profilePicture && profilePicture}
               name={profile?.name}
               size="large"
             />

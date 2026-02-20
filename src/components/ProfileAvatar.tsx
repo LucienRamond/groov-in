@@ -5,13 +5,16 @@ export default function ProfileAvatar({
   name,
   size,
   profile_picture,
+  new_profile_picture,
 }: {
   name?: string;
   size?: string;
   profile_picture?: string;
+  new_profile_picture?: string;
 }) {
   const [avatarSize, setAvatarSize] = useState<string>("100px");
   const [fontSize, setFontSize] = useState<string>("3rem");
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
 
   useEffect(() => {
     switch (size) {
@@ -30,6 +33,26 @@ export default function ProfileAvatar({
     }
   }, [size]);
 
+  const display_avatar = () => {
+    if (profile_picture) {
+      return (
+        <img
+          className=" object-cover overflow-hidden h-full min-w-full"
+          src={`${BASE_URL}/user/avatar${profile_picture}`}
+        />
+      );
+    } else if (new_profile_picture) {
+      return (
+        <img
+          className=" object-cover overflow-hidden h-full min-w-full"
+          src={`${profile_picture}`}
+        />
+      );
+    } else {
+      return name?.charAt(0);
+    }
+  };
+
   return (
     <Avatar
       sx={{
@@ -42,14 +65,7 @@ export default function ProfileAvatar({
         border: "2px solid",
       }}
     >
-      {profile_picture ? (
-        <img
-          className=" object-cover overflow-hidden h-full min-w-full"
-          src={`${profile_picture}`}
-        />
-      ) : (
-        name?.charAt(0)
-      )}
+      {display_avatar()}
     </Avatar>
   );
 }
