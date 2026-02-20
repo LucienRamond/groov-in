@@ -16,6 +16,7 @@ import {
 import { useNavigate } from "react-router";
 import BandComponent from "../../components/BandComponent";
 import { ToastContext } from "../providers/toast/toastContext";
+import { UserContext } from "../providers/user/UserContext";
 
 interface Form extends HTMLFormElement {
   band_name: HTMLInputElement;
@@ -29,14 +30,14 @@ export default function MyBands() {
   const [onCreatingBand, setOnCreatingBand] = useState<boolean>(false);
   const formRef = useRef<Form>(null);
   const BASE_URL = import.meta.env.VITE_BASE_URL;
-  const user = localStorage.getItem("user");
+  const { user } = useContext(UserContext);
 
   const handleClose = () => {
     setOnCreatingBand(false);
   };
 
   useEffect(() => {
-    if (!localStorage.getItem("user")) {
+    if (!user) {
       navigate("/user/login");
     }
     fetch(`${BASE_URL}/bands/my-bands`, {
@@ -44,7 +45,7 @@ export default function MyBands() {
     })
       .then((response) => response.json())
       .then((data) => !data.message && setBands(data));
-  }, [BASE_URL, navigate]);
+  }, [BASE_URL, navigate, user]);
 
   const createBand = () => {
     const form = formRef.current as Form;
@@ -71,7 +72,7 @@ export default function MyBands() {
     if (!user) {
       return false;
     }
-    if (JSON.parse(user).id == creator_id) {
+    if (user.id == creator_id) {
       return true;
     } else {
       return false;
