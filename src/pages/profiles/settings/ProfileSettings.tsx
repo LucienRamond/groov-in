@@ -101,6 +101,7 @@ export default function ProfileSettings() {
       .then((response) => response.json())
       .then((data) => {
         setUser(data);
+        setProfilePicture(`${BASE_URL}/user/avatar/${data.avatar_img}`);
       });
 
     toggleToast({
