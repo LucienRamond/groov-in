@@ -29,10 +29,16 @@ export default function ProfileComponent({ id }: { id: number }) {
   }, [BASE_URL, id]);
 
   return (
-    <Card square className="w-[100%] z-10 grid border">
-      <CardContent sx={{ padding: 0 }}>
-        <div className="p-2 flex items-center gap-4">
-          <ProfileAvatar name={profile?.name} />
+    <Card className="max-w-[550px] w-full grid !rounded-xl !bg-[#241e20] !bg-[url(assets/profile/card-content.webp)] bg-no-repeat bg-contain">
+      <CardContent
+        sx={{ padding: 0 }}
+        className="min-h-[200px] grid content-between"
+      >
+        <div className="mx-5 mt-7 rounded-t-xl p-4 flex items-center gap-4 bg-[var(--color)]">
+          <ProfileAvatar
+            name={profile?.name}
+            profile_picture={profile?.avatar_img}
+          />
           <div className=" w-full">
             <Typography
               className={`border-b border-[var(--secondary-background-color)]
@@ -69,45 +75,56 @@ export default function ProfileComponent({ id }: { id: number }) {
             )}
           </div>
         </div>
-
-        <Accordion square disableGutters disabled={!profile?.bands.length}>
-          <AccordionSummary
-            sx={{ backgroundColor: "rgb(241 245 249)" }}
-            expandIcon={<ChevronDown />}
+        <div className=" px-5 pb-2">
+          <Accordion
+            square
+            disableGutters
+            disabled={!profile?.bands.length}
+            className="rounded-b-xl !bg-[var(--background-color)]"
           >
-            <Typography component={"span"}>Bands</Typography>
-            <Typography sx={{ marginLeft: "1rem" }} component={"span"}>
-              ({profile?.bands.length})
-            </Typography>
-          </AccordionSummary>
-          {profile?.bands.length && (
-            <AccordionDetails>
-              <List disablePadding className=" grid gap-2">
-                {profile?.bands.map((band) => {
-                  return (
-                    <ListItem
-                      key={band.id}
-                      disablePadding
-                      className={"border rounded bg-slate-100 "}
-                    >
-                      <ListItemButton
-                        onClick={() => navigate(`/bands/${band.id}`)}
+            <AccordionSummary expandIcon={<ChevronDown color="white" />}>
+              <Typography component={"span"} className=" text-white">
+                Bands
+              </Typography>
+              <Typography
+                sx={{ marginLeft: "1rem" }}
+                component={"span"}
+                className=" text-white"
+              >
+                ({profile?.bands.length})
+              </Typography>
+            </AccordionSummary>
+            {profile?.bands.length && (
+              <AccordionDetails>
+                <List disablePadding className=" grid gap-2">
+                  {profile?.bands.map((band) => {
+                    return (
+                      <ListItem
+                        key={band.id}
+                        disablePadding
+                        className={"border rounded bg-slate-100 "}
                       >
-                        {band.name}
-                      </ListItemButton>
-                    </ListItem>
-                  );
-                })}
-              </List>
-            </AccordionDetails>
-          )}
-        </Accordion>
+                        <ListItemButton
+                          onClick={() => navigate(`/bands/${band.id}`)}
+                        >
+                          {band.name}
+                        </ListItemButton>
+                      </ListItem>
+                    );
+                  })}
+                </List>
+              </AccordionDetails>
+            )}
+          </Accordion>
+        </div>
       </CardContent>
 
-      <CardActions className=" flex justify-center">
+      <CardActions className=" h-[60px] flex justify-center bg-[#241e20] !bg-[url(assets/profile/card-footer.webp)] bg-stretch">
         <Button
+          variant="contained"
           size="small"
           onClick={() => navigate(`/profiles/${profile?.id}`)}
+          className=" !bg-[var(--border-color)] !text-[var(--color)] hover:!bg-[var(--color)] hover:!text-[var(--border-color)] !transition-colors !ease-in !duration-300"
         >
           View profile
         </Button>
