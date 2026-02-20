@@ -8,4 +8,5 @@ export interface ProfileType {
   instruments: InstrumentType[];
   email: string;
   bands: BandType[];
+  avatar_img: string;
 }

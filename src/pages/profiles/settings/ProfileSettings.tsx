@@ -31,7 +31,6 @@ export default function ProfileSettings() {
   const { toggleToast } = useContext(ToastContext);
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
-
   const [instruments, setInstruments] = useState<number[] | undefined>(
     undefined,
   );
@@ -42,9 +41,12 @@ export default function ProfileSettings() {
     instruments: [],
     email: "Email",
     bands: [],
+    avatar_img: "",
   });
   const [updateEmail, setUpdateEmail] = useState<boolean>(false);
   const [profilePicture, setProfilePicture] = useState<string | undefined>("");
+  const [file, setFile] = useState<File | null>(null);
+  const [avatarName, setAvatarName] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(`${BASE_URL}/user/@me`, {
@@ -65,6 +67,21 @@ export default function ProfileSettings() {
 
   const handleForm = async () => {
     const form = formRef.current as Form;
+    const img_file = new FormData();
+
+    if (file) {
+      img_file.append("file", file);
+
+      fetch(`${BASE_URL}/user/edit/avatar`, {
+        credentials: "include",
+        method: "POST",
+        body: img_file,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setAvatarName(data.avatar_img_name);
+        });
+    }
 
     fetch(`${BASE_URL}/user/edit`, {
       credentials: "include",
@@ -78,6 +95,7 @@ export default function ProfileSettings() {
         email: form.email.value,
         description: form.description.value,
         instruments: instruments,
+        avatar_img: file ? avatarName : profile.avatar_img,
       }),
     })
       .then((response) => response.json())
@@ -95,6 +113,7 @@ export default function ProfileSettings() {
   const uploadImg = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       setProfilePicture(URL.createObjectURL(e.target.files[0]));
+      setFile(e.target.files[0]);
     }
   };
 
