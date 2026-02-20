@@ -38,7 +38,7 @@ export default function ProfileAvatar({
       return (
         <img
           className=" object-cover overflow-hidden h-full min-w-full"
-          src={`${BASE_URL}/user/avatar${profile_picture}`}
+          src={`${BASE_URL}/user/avatar/${profile_picture}`}
         />
       );
     } else if (new_profile_picture) {
