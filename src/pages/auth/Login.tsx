@@ -6,8 +6,9 @@ import {
   Typography,
 } from "@mui/material";
 import Page from "../../components/Page";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router";
+import { UserContext } from "../providers/user/UserContext";
 
 interface Form extends HTMLFormElement {
   email: HTMLInputElement;
@@ -19,6 +20,7 @@ export default function Login() {
   const navigate = useNavigate();
   const formRef = useRef<Form>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { setUser } = useContext(UserContext);
 
   const handleForm = () => {
     const form = formRef.current as Form;
@@ -44,10 +46,7 @@ export default function Login() {
         if (data.message) {
           return setErrorMessage(data.message);
         }
-        localStorage.setItem(
-          "user",
-          JSON.stringify({ id: data.id, name: data.name })
-        );
+        setUser(data);
         navigate("/");
       });
   };

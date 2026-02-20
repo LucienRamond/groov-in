@@ -2,14 +2,12 @@ import {
   Button,
   List,
   ListItem,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
 import { CirclePause, CirclePlay } from "lucide-react";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import ToggleTheme from "../theme/ToggleTheme";
-import { useEffect, useState } from "react";
 import UserNavBar from "./UserNavBar";
 export interface User {
   id: number;
@@ -17,19 +15,6 @@ export interface User {
 }
 
 export default function BrowserNavbar() {
-  const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
-
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-
-    if (!user) {
-      setCurrentUser(undefined);
-    } else {
-      setCurrentUser(JSON.parse(user));
-    }
-  }, [navigate]);
-
   return (
     <div className=" flex justify-between border-b border-[var(--color)] bg-[var(--secondary-background-color)]">
       <List className=" flex" disablePadding>
@@ -110,25 +95,7 @@ export default function BrowserNavbar() {
       </List>
 
       <List className=" flex">
-        {!currentUser ? (
-          <>
-            <ListItem disablePadding disableGutters>
-              <ListItemButton onClick={() => navigate("/user/login")}>
-                <ListItemText primary="Login" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding disableGutters>
-              <ListItemButton onClick={() => navigate("/user/register")}>
-                <ListItemText primary="Register" />
-              </ListItemButton>
-            </ListItem>
-          </>
-        ) : (
-          <UserNavBar
-            user={currentUser}
-            navigate={(destination: string) => navigate(destination)}
-          />
-        )}
+        <UserNavBar />
         <ListItem disablePadding disableGutters>
           <ToggleTheme />
         </ListItem>

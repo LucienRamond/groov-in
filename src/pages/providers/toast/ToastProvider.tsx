@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ToastContext } from "./toastContext";
-import ToastComponent from "../../components/ToastComponent";
+import ToastComponent from "../../../components/ToastComponent";
 
 interface Props {
   children?: React.ReactNode;

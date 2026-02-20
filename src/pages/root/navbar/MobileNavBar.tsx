@@ -2,9 +2,7 @@ import {
   Button,
   List,
   ListItem,
-  ListItemButton,
   ListItemIcon,
-  ListItemText,
   Paper,
   Typography,
 } from "@mui/material";
@@ -16,9 +14,8 @@ import {
   PlayIcon,
   UsersIcon,
 } from "lucide-react";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink } from "react-router";
 import ToggleTheme from "../theme/ToggleTheme";
-import { useEffect, useState } from "react";
 import UserNavBar from "./UserNavBar";
 export interface User {
   id: number;
@@ -26,19 +23,6 @@ export interface User {
 }
 
 export default function MobileNavbar() {
-  const navigate = useNavigate();
-  const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
-
-  useEffect(() => {
-    const user = localStorage.getItem("user");
-
-    if (!user) {
-      setCurrentUser(undefined);
-    } else {
-      setCurrentUser(JSON.parse(user));
-    }
-  }, [navigate]);
-
   return (
     <div className="z-50 flex justify-between border-b border-[var(--color)] bg-[var(--secondary-background-color)]">
       <List className=" flex" disablePadding>
@@ -52,25 +36,7 @@ export default function MobileNavbar() {
         </ListItem>
       </List>
       <List className=" flex">
-        {!currentUser ? (
-          <>
-            <ListItem disablePadding disableGutters>
-              <ListItemButton onClick={() => navigate("/user/login")}>
-                <ListItemText primary="Login" />
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding disableGutters>
-              <ListItemButton onClick={() => navigate("/user/register")}>
-                <ListItemText primary="Register" />
-              </ListItemButton>
-            </ListItem>
-          </>
-        ) : (
-          <UserNavBar
-            user={currentUser}
-            navigate={(destination: string) => navigate(destination)}
-          />
-        )}
+        <UserNavBar />
         <ListItem disablePadding disableGutters>
           <ToggleTheme />
         </ListItem>
@@ -96,8 +62,8 @@ export default function MobileNavbar() {
               isPending
                 ? "pending"
                 : isActive
-                ? "active w-full bg-[var(--color)]  text-[var(--secondary-background-color)] font-bold p-2 min-w-[90px]"
-                : "active w-full text-[var(--color)] font-bold p-2 min-w-[90px]"
+                  ? "active w-full bg-[var(--color)]  text-[var(--secondary-background-color)] font-bold p-2 min-w-[90px]"
+                  : "active w-full text-[var(--color)] font-bold p-2 min-w-[90px]"
             }
           >
             <div className=" grid justify-items-center">
@@ -113,8 +79,8 @@ export default function MobileNavbar() {
               isPending
                 ? "pending"
                 : isActive
-                ? "active w-full  bg-[var(--color)]  text-[var(--secondary-background-color)] font-bold p-2 min-w-[90px]"
-                : "active w-full  text-[var(--color)] font-bold p-2 min-w-[90px]"
+                  ? "active w-full  bg-[var(--color)]  text-[var(--secondary-background-color)] font-bold p-2 min-w-[90px]"
+                  : "active w-full  text-[var(--color)] font-bold p-2 min-w-[90px]"
             }
           >
             <div className=" grid justify-items-center">
@@ -130,8 +96,8 @@ export default function MobileNavbar() {
               isPending
                 ? "pending"
                 : isActive
-                ? "active w-full  bg-[var(--color)]  text-[var(--secondary-background-color)] font-bold p-2 min-w-[90px]"
-                : "active  w-full text-[var(--color)] font-bold p-2 min-w-[90px]"
+                  ? "active w-full  bg-[var(--color)]  text-[var(--secondary-background-color)] font-bold p-2 min-w-[90px]"
+                  : "active  w-full text-[var(--color)] font-bold p-2 min-w-[90px]"
             }
           >
             <div className=" grid justify-items-center">
@@ -147,8 +113,8 @@ export default function MobileNavbar() {
               isPending
                 ? "pending"
                 : isActive
-                ? "active w-full h-full bg-[var(--color)]  text-[var(--secondary-background-color)] font-bold p-2 min-w-[90px]"
-                : "active w-full h-full text-[var(--color)] font-bold p-2 min-w-[90px]"
+                  ? "active w-full h-full bg-[var(--color)]  text-[var(--secondary-background-color)] font-bold p-2 min-w-[90px]"
+                  : "active w-full h-full text-[var(--color)] font-bold p-2 min-w-[90px]"
             }
           >
             <div className=" grid justify-items-center">

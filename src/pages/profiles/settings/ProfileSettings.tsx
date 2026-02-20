@@ -14,9 +14,10 @@ import { ImagePlusIcon, PenLineIcon } from "lucide-react";
 import { useNavigate } from "react-router";
 import { InstrumentType } from "../../../utils/types/instrumentTypes";
 import ResetPassword from "./ResetPassword";
-import { ToastContext } from "../../providers/toastContext";
+import { ToastContext } from "../../providers/toast/toastContext";
 import InstrumentsSelect from "./InstrumentsSelect";
 import ProfileAvatar from "../../../components/ProfileAvatar";
+import { UserContext } from "../../providers/user/UserContext";
 
 interface Form extends HTMLFormElement {
   username: HTMLInputElement;
@@ -29,9 +30,10 @@ export default function ProfileSettings() {
   const formRef = useRef<Form>(null);
   const { toggleToast } = useContext(ToastContext);
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   const [instruments, setInstruments] = useState<number[] | undefined>(
-    undefined
+    undefined,
   );
   const [profile, setProfile] = useState<ProfileType>({
     id: 0,
@@ -80,10 +82,7 @@ export default function ProfileSettings() {
     })
       .then((response) => response.json())
       .then((data) => {
-        localStorage.setItem(
-          "user",
-          JSON.stringify({ id: data.id, name: data.name })
-        );
+        setUser(data);
       });
 
     toggleToast({

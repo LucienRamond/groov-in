@@ -1,7 +1,7 @@
 import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
 import { useContext, useEffect, useState } from "react";
 import { Alert, Typography } from "@mui/material";
-import { ToastContext } from "../pages/providers/toastContext";
+import { ToastContext } from "../pages/providers/toast/toastContext";
 
 export default function ToastComponent({
   title,
@@ -19,7 +19,7 @@ export default function ToastComponent({
 
   const handleClose = (
     _event: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason
+    reason?: SnackbarCloseReason,
   ) => {
     if (reason === "clickaway") {
       return;

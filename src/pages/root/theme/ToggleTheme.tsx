@@ -1,6 +1,6 @@
 import { ListItemButton } from "@mui/material";
 import { useContext, useEffect } from "react";
-import { ThemeContext } from "../../providers/themeContext";
+import { ThemeContext } from "../../providers/theme/themeContext";
 import { Moon, Sun } from "lucide-react";
 
 export default function ToggleTheme() {
@@ -9,7 +9,7 @@ export default function ToggleTheme() {
   useEffect(() => {
     document.documentElement.setAttribute(
       "data-theme",
-      darkTheme ? "dark" : "light"
+      darkTheme ? "dark" : "light",
     );
   }, [darkTheme]);
 

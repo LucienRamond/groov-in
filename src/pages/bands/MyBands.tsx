@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router";
 import BandComponent from "../../components/BandComponent";
-import { ToastContext } from "../providers/toastContext";
+import { ToastContext } from "../providers/toast/toastContext";
 
 interface Form extends HTMLFormElement {
   band_name: HTMLInputElement;

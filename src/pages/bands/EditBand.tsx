@@ -13,7 +13,7 @@ import {
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { BandType } from "../../utils/types/bandTypes";
-import { ToastContext } from "../providers/toastContext";
+import { ToastContext } from "../providers/toast/toastContext";
 
 interface Form extends HTMLFormElement {
   band_name: HTMLInputElement;
