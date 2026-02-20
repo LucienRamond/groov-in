@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useRef, useState } from "react";
 import { ProfileType } from "../../../utils/types/profileType";
 import Page from "../../../components/Page";
 import {
@@ -8,6 +8,7 @@ import {
   Button,
   TextField,
   InputAdornment,
+  styled,
 } from "@mui/material";
 import { ImagePlusIcon, PenLineIcon } from "lucide-react";
 import { useNavigate } from "react-router";
@@ -27,8 +28,8 @@ export default function ProfileSettings() {
   const BASE_URL = import.meta.env.VITE_BASE_URL;
   const formRef = useRef<Form>(null);
   const { toggleToast } = useContext(ToastContext);
-
   const navigate = useNavigate();
+
   const [instruments, setInstruments] = useState<number[] | undefined>(
     undefined
   );
@@ -41,7 +42,7 @@ export default function ProfileSettings() {
     bands: [],
   });
   const [updateEmail, setUpdateEmail] = useState<boolean>(false);
-  // const [profilePicture, setProfilePicture] = useState<string | undefined>("");
+  const [profilePicture, setProfilePicture] = useState<string | undefined>("");
 
   useEffect(() => {
     fetch(`${BASE_URL}/user/@me`, {
@@ -92,23 +93,23 @@ export default function ProfileSettings() {
     return navigate("/");
   };
 
-  // const uploadImg = (e: ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files) {
-  //     setProfilePicture(URL.createObjectURL(e.target.files[0]));
-  //   }
-  // };
+  const uploadImg = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setProfilePicture(URL.createObjectURL(e.target.files[0]));
+    }
+  };
 
-  // const VisuallyHiddenInput = styled("input")({
-  //   clip: "rect(0 0 0 0)",
-  //   clipPath: "inset(50%)",
-  //   height: 1,
-  //   overflow: "hidden",
-  //   position: "absolute",
-  //   bottom: 0,
-  //   left: 0,
-  //   whiteSpace: "nowrap",
-  //   width: 1,
-  // });
+  const VisuallyHiddenInput = styled("input")({
+    clip: "rect(0 0 0 0)",
+    clipPath: "inset(50%)",
+    height: 1,
+    overflow: "hidden",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    whiteSpace: "nowrap",
+    width: 1,
+  });
 
   return (
     <Page>
@@ -119,7 +120,7 @@ export default function ProfileSettings() {
         <div className="grid sm:grid-cols-[min-content,1fr] gap-4">
           <div className="relative p-4 border w-fit mx-auto border-gray-400 hover:border-black rounded">
             <ProfileAvatar
-              // profile_picture={profilePicture}
+              profile_picture={profilePicture}
               name={profile?.name}
               size="large"
             />
@@ -133,7 +134,7 @@ export default function ProfileSettings() {
               className=" bottom-0 right-0"
             >
               <ImagePlusIcon className=" m-2" />
-              {/* <VisuallyHiddenInput type="file" onChange={(e) => uploadImg(e)} /> */}
+              <VisuallyHiddenInput type="file" onChange={(e) => uploadImg(e)} />
             </Button>
           </div>
 

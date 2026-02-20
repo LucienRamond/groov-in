@@ -51,8 +51,8 @@ export default function BrowserNavbar() {
                 isPending
                   ? "pending"
                   : isActive
-                  ? "active bg-[var(--color)] text-[var(--secondary-background-color)] font-bold p-2 rounded min-w-[90px]"
-                  : "active text-[var(--color)] font-bold p-2 rounded min-w-[90px]"
+                    ? "active bg-[var(--color)] text-[var(--secondary-background-color)] font-bold p-2 rounded min-w-[90px]"
+                    : "active text-[var(--color)] font-bold p-2 rounded min-w-[90px]"
               }
             >
               Home
@@ -67,8 +67,8 @@ export default function BrowserNavbar() {
                 isPending
                   ? "pending"
                   : isActive
-                  ? "active bg-[var(--color)] text-[var(--secondary-background-color)] font-bold p-2 rounded min-w-[90px]"
-                  : "active text-[var(--color)] font-bold p-2 rounded min-w-[90px]"
+                    ? "active bg-[var(--color)] text-[var(--secondary-background-color)] font-bold p-2 rounded min-w-[90px]"
+                    : "active text-[var(--color)] font-bold p-2 rounded min-w-[90px]"
               }
             >
               Profiles
@@ -83,8 +83,8 @@ export default function BrowserNavbar() {
                 isPending
                   ? "pending"
                   : isActive
-                  ? "active bg-[var(--color)] text-[var(--secondary-background-color)] font-bold p-2 rounded min-w-[90px]"
-                  : "active text-[var(--color)] font-bold p-2 rounded min-w-[90px]"
+                    ? "active bg-[var(--color)] text-[var(--secondary-background-color)] font-bold p-2 rounded min-w-[90px]"
+                    : "active text-[var(--color)] font-bold p-2 rounded min-w-[90px]"
               }
             >
               Bands
@@ -99,8 +99,8 @@ export default function BrowserNavbar() {
                 isPending
                   ? "pending"
                   : isActive
-                  ? "active bg-[var(--color)] text-[var(--secondary-background-color)] font-bold p-2 rounded min-w-[90px]"
-                  : "active text-[var(--color)] font-bold p-2 rounded min-w-[90px]"
+                    ? "active bg-[var(--color)] text-[var(--secondary-background-color)] font-bold p-2 rounded min-w-[90px]"
+                    : "active text-[var(--color)] font-bold p-2 rounded min-w-[90px]"
               }
             >
               My&nbsp;bands

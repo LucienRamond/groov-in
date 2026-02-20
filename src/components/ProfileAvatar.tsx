@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 export default function ProfileAvatar({
   name,
   size,
-  image,
+  profile_picture,
 }: {
   name?: string;
   size?: string;
-  image?: string;
+  profile_picture?: string;
 }) {
   const [avatarSize, setAvatarSize] = useState<string>("100px");
   const [fontSize, setFontSize] = useState<string>("3rem");
@@ -42,10 +42,10 @@ export default function ProfileAvatar({
         border: "2px solid",
       }}
     >
-      {image ? (
+      {profile_picture ? (
         <img
           className=" object-cover overflow-hidden h-full min-w-full"
-          src={image}
+          src={`${profile_picture}`}
         />
       ) : (
         name?.charAt(0)
