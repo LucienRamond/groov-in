@@ -15,7 +15,7 @@ const UserProvider: React.FC<Props> = ({ children }) => {
       credentials: "include",
     })
       .then((response) => response.json())
-      .then((data) => data.message && setUser(null));
+      .then((data: ProfileType) => !data.id && setUser(null));
   }, [BASE_URL]);
 
   function setUserData(user_data: ProfileType | null) {
