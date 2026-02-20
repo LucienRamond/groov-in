@@ -34,18 +34,18 @@ export default function ProfileAvatar({
   }, [size]);
 
   const display_avatar = () => {
-    if (profile_picture) {
+    if (new_profile_picture) {
+      return (
+        <img
+          className=" object-cover overflow-hidden h-full min-w-full"
+          src={`${new_profile_picture}`}
+        />
+      );
+    } else if (profile_picture) {
       return (
         <img
           className=" object-cover overflow-hidden h-full min-w-full"
           src={`${BASE_URL}/user/avatar/${profile_picture}`}
-        />
-      );
-    } else if (new_profile_picture) {
-      return (
-        <img
-          className=" object-cover overflow-hidden h-full min-w-full"
-          src={`${profile_picture}`}
         />
       );
     } else {
