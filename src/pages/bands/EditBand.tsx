@@ -88,7 +88,8 @@ export default function EditBand({ band_data }: { band_data?: BandType }) {
     <>
       <Button
         size="small"
-        color="error"
+        className=" !border-[var(--border-color)] !text-[var(--color)] hover:!bg-[var(--border-color)] !transition-colors !ease-in !duration-300"
+        color="info"
         variant="outlined"
         onClick={() => {
           setOnEditBand(true);
