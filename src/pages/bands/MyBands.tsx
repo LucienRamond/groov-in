@@ -68,28 +68,11 @@ export default function MyBands() {
       });
   };
 
-  const isEditable = (creator_id: number) => {
-    if (!user) {
-      return false;
-    }
-    if (user.id == creator_id) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   return (
     <Page>
       <div className=" grid grid-cols-2 gap-2 mt-2">
         {bands.map((band) => {
-          return (
-            <BandComponent
-              key={band.id}
-              id={band.id}
-              edit={isEditable(band.created_by[0].id)}
-            />
-          );
+          return <BandComponent key={band.id} id={band.id} />;
         })}
 
         <Button

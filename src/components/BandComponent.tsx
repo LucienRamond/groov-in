@@ -13,20 +13,16 @@ import {
 } from "@mui/material";
 
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { BandType } from "../utils/types/bandTypes";
 import ProfileAvatar from "./ProfileAvatar";
 import EditBand from "../pages/bands/EditBand";
+import { UserContext } from "../pages/providers/user/UserContext";
 
-export default function BandComponent({
-  id,
-  edit,
-}: {
-  id: number;
-  edit?: boolean;
-}) {
+export default function BandComponent({ id }: { id: number }) {
   const [band, setBand] = useState<BandType | undefined>(undefined);
+  const { user } = useContext(UserContext);
   const navigate = useNavigate();
   const BASE_URL = import.meta.env.VITE_BASE_URL;
 
@@ -112,7 +108,7 @@ export default function BandComponent({
         >
           View band
         </Button>
-        {!edit && <EditBand band_data={band} />}
+        {user?.id == band?.created_by[0].id && <EditBand band_data={band} />}
       </CardActions>
     </Card>
   );
