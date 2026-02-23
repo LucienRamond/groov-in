@@ -76,17 +76,22 @@ export default function BandComponent({
             {band?.members.length && (
               <AccordionDetails>
                 <List disablePadding className=" grid gap-2">
-                  {band?.members.map((band) => {
+                  {band?.members.map((member) => {
                     return (
                       <ListItem
-                        key={band.id}
+                        key={member.id}
                         disablePadding
                         className={"border rounded bg-slate-100 "}
                       >
                         <ListItemButton
-                          onClick={() => navigate(`/profiles/${band.id}`)}
+                          onClick={() => navigate(`/profiles/${member.id}`)}
+                          className=" flex gap-2"
                         >
-                          {band.name}
+                          <ProfileAvatar
+                            size="small"
+                            profile_picture={member.avatar_img}
+                          />
+                          {member.name}
                         </ListItemButton>
                       </ListItem>
                     );
@@ -107,7 +112,7 @@ export default function BandComponent({
         >
           View band
         </Button>
-        {edit && <EditBand band_data={band} />}
+        {!edit && <EditBand band_data={band} />}
       </CardActions>
     </Card>
   );
